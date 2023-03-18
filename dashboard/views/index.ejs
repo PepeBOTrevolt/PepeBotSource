@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <title><%= myBot.client.user.username %></title>
+    <link rel="shortcut icon" href="<%= myBot.client.user.avatarURL %>" type="image/png">
+</head>
+<style>
+    .floating { 
+        animation-name: floating;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+    @keyframes floating {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 15px); }
+        100%   { transform: translate(0, -0px); }   
+    }
+</style>
+<body class="bg-gray-900">
+    <!-- navbar -->
+    <%- include("components/nav"); -%>
+
+    <!-- main -->
+    <section id="main" class="mt-28">
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+            <div class="mr-auto place-self-center lg:col-span-8">
+                <h1 class="max-w-2xl mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-white">
+                    <%= myBot.client.user.username %>
+                </h1>
+                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                    A simple and useful multi-purpose bot for your Revolt server!
+                    <br>
+                    Used in <b><%= myBot.client.servers.size %> servers</b> and used by <b><%= myBot.client.users.size %> users</b>!
+                </p>
+
+                <a href="https://app.revolt.chat/bot/<%= myBot.client.user._id %>" target="_blank" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800">
+                    Invite <%= myBot.client.user.username %>
+                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+                <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white border border-gray-700 hover:bg-gray-700 rounded-lg">
+                    Dashboard soon!
+                </a>
+            </div>
+            <div class="hidden lg:mt-0 lg:col-span-2 lg:flex">
+                <img src="<%= myBot.client.user.avatarURL %>" alt="mockup">
+            </div>
+        </div>
+        <div class="flex flex-col justify-center items-center text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 floating">
+                <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- stuff -->
+    <section class="bg-white dark:bg-gray-900 mt-96">
+        <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+            <img class="w-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup.svg" alt="dashboard image">
+            <img class="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg" alt="dashboard image">
+            <div class="mt-4 md:mt-0">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white"><%= myBot.client.user.username %>'s Dashboard</h2>
+                <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">With <%= myBot.client.user.username %>'s dashboard, you can easily manage your server configuration.</p>
+                <a href="#" class="inline-flex items-center text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    Get started
+                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- stats -->
+    <section class="bg-white dark:bg-gray-900 mt-44">
+        <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+            <div class="mb-8 lg:mb-16">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Stats</h2>
+            </div>
+            <dl class="grid max-w-screen-md gap-8 mx-auto text-gray-900 sm:grid-cols-4 dark:text-white">
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold"><%= myBot.client.servers.size %></dt>
+                    <dd class="font-light text-gray-500 dark:text-gray-400">Servers</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold"><%= myBot.client.users.size %></dt>
+                    <dd class="font-light text-gray-500 dark:text-gray-400">Users</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold"><%= myBot.commands.size %></dt>
+                    <dd class="font-light text-gray-500 dark:text-gray-400">Commands</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl md:text-4xl font-extrabold">
+                        <% if (myBot.client.user.online == true) { %>
+                            Online
+                        <% } else { %>
+                            Offline
+                        <% } %>
+                    </dt>
+                    <dd class="font-light text-gray-500 dark:text-gray-400">Status</dd>
+                </div>
+            </dl>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <%- include("components/footer"); -%>
+</body>
+</html>

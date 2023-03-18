@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <title><%= myBot.client.user.username %> - Select your server</title>
+    <link rel="shortcut icon" href="<%= myBot.client.user.avatarURL %>" type="image/png">
+</head>
+<body class="bg-gray-900">
+    <!-- navbar -->
+    <%- include("../components/nav"); -%>
+
+    <!-- main -->
+    <section id="main" class="mt-28">
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+            <div class="mr-auto place-self-center lg:col-span-8">
+                <h1 class="max-w-2xl text-2xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-white">
+                    Select your server
+                </h1>
+                <p class="max-w-2xl font-light text-gray-500 md:text-lg lg:text-xl dark:text-gray-400">
+                    Make sure you have all the permissions you need or the dashboard will not work!
+                </p>
+            </div>
+        </div>
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-8 mb-52">
+            <a href="/dashboard/1" class="flex flex-wrap items-center max-w-full p-6 bg-white rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 shadow">
+                <img src="" class="h-20 w-20 mr-5 shadow rounded-full">
+                <div class="flex flex-col justify-center align-center">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{SERVER_NAME}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">{SERVER_DESC}</p>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">{SERVER_MEMBER_COUNT} members</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <%- include("../components/footer"); -%>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <title><%= myBot.client.user.username %> - Commands</title>
+    <link rel="shortcut icon" href="<%= myBot.client.user.avatarURL %>" type="image/png">
+</head>
+<body class="bg-gray-900">
+    <!-- navbar -->
+    <%- include("components/nav"); -%>
+
+    <!-- main -->
+    <section id="main" class="mt-28">
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+            <div class="mr-auto place-self-center lg:col-span-8">
+                <h1 class="max-w-2xl text-2xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-white">
+                    Command list
+                </h1>
+                <p class="max-w-2xl font-light text-gray-500 md:text-lg lg:text-xl dark:text-gray-400">
+                    All of the avaliable commands for <%= myBot.client.user.username %>
+                </p>
+            </div>
+        </div>
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 mb-52">
+            <% myBot.commands.forEach(function(command) { %>
+                <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                    <h2 id="accordion-flush-heading-<%= command.name %>">
+                      <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-<%= command.name %>" aria-expanded="false" aria-controls="accordion-flush-<%= command.name %>">
+                        <span><%= command.name %></span>
+                        <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                      </button>
+                    </h2>
+                    <div id="accordion-flush-<%= command.name %>" class="hidden" aria-labelledby="accordion-flush-heading-<%= command.name %>">
+                      <div class="py-5 font-light border-b border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400"><%= command.description %></p>
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Usage: <%= command.usage %></p>
+                      </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <%- include("components/footer"); -%>
+</body>
+</html>

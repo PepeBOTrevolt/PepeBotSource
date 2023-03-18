@@ -23,14 +23,14 @@ module.exports = {
 
       let comLink = (comHashLong) ? `https://github.com/PepeBOTrevolt/PepeBotSource/tree/${comHashLong}` : "https://github.com/PepeBOTrevolt/PepeBotSource";
 
-      return `${comHash}`;
+      return `[${comHash}](${comLink})`;
     }
 
     const embed = new SympactEmbedBuilder()
       .setDescription(`Servers: \`${message.client.servers.size}\`
       Users: \`${message.client.users.size}\`
       Uptime: \`${getUptime()}\`
-      Build: \`${getCurrentBuildNumber()}\``);
+      Build: ${getCurrentBuildNumber()}`);
     message.reply({ embeds: [embed] });
   },
 };

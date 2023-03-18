@@ -1,4 +1,4 @@
-const SympactEmbedBuilder = require("../lib/embedBuilder");
+onst SympactEmbedBuilder = require("../lib/embedBuilder");
 const { prefix } = require("../config");
 
 module.exports = {
@@ -35,6 +35,48 @@ module.exports = {
 
     if ((badges & Translator) == Translator) {
       embedBadge += "Translator, ";
+    } else {
+      embedBadge += "";
+    }
+
+    if ((badges & Supporter) == Supporter) {
+      embedBadge += "Supporter, ";
+    } else {
+      embedBadge += "";
+    }
+
+    if ((badges & ResponsibleDisclosure) == ResponsibleDisclosure) {
+      embedBadge += "Responsible Disclosure, ";
+    } else {
+      embedBadge += "";
+    }
+
+    if ((badges & Founder) == Founder) {
+      embedBadge += "Founder, ";
+    } else {
+      embedBadge += "";
+    }
+    
+    if ((badges & PlatformModeration) == PlatformModeration) {
+      embedBadge += "Platform Moderation, ";
+    } else {
+      embedBadge += "";
+    }
+
+    if ((badges & ActiveSupporter) == ActiveSupporter) {
+      embedBadge += "Active Supporter, ";
+    } else {
+      embedBadge += "";
+    }
+
+    if ((badges & Paw) == Paw) {
+      embedBadge += "Paw, ";
+    } else {
+      embedBadge += "";
+    }
+
+    if ((badges & EarlyAdopter) == EarlyAdopter) {
+      embedBadge += "Early Adopter, ";
     } else {
       embedBadge += "";
     }

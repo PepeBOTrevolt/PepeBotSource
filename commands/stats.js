@@ -17,20 +17,15 @@ module.exports = {
       let comHash = require("child_process")
         .execSync("git rev-parse --short HEAD", {cwd: __dirname})
         .toString().trim();
-      let comHashLong = require("child_process")
-        .execSync("git rev-parse HEAD", {cwd: __dirname})
-        .toString().trim();
 
-      let comLink = (comHashLong) ? `https://github.com/PepeBOTrevolt/PepeBotSource/tree/${comHashLong}` : "https://github.com/PepeBOTrevolt/PepeBotSource";
-
-      return `[${comHash}](${comLink})`;
+      return `${comHash}`;
     }
 
     const embed = new SympactEmbedBuilder()
       .setDescription(`Servers: \`${message.client.servers.size}\`
       Users: \`${message.client.users.size}\`
       Uptime: \`${getUptime()}\`
-      Build: ${getCurrentBuildNumber()}`);
+      Build: \`${getCurrentBuildNumber()}\``);
     message.reply({ embeds: [embed] });
   },
 };

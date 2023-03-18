@@ -21,13 +21,22 @@ module.exports = {
       return `${comHash}`;
     }
 
+    async function fetchUsers() {
+      const promises = [];
+      for (const server of message.client.servers) {
+        promises.push(server[1].fetchMembers());
+      }
+    }
+    fetchUsers();
+    setInterval(() => fetchUsers, 60 * 1000 * 30);
+
     const embed = new SympactEmbedBuilder()
       .setTitle("A simple and useful multi-purpose bot for your Revolt server!")
       .setDescription(`Servers: \`${message.client.servers.size}\`
       Users: \`${message.client.users.size}\`
       Uptime: \`${getUptime()}\`
       Build: \`${getCurrentBuildNumber()}\`
-      
+
       [Dashboard (soon!)](https://app.revolt.chat) | [Support Server](https://rvlt.gg/Fj2RwDNP) | [GitHub](https://github.com/PepeBOTrevolt)`);
     message.reply({ embeds: [embed] });
   },

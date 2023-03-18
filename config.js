@@ -1,6 +1,5 @@
+// config.js
 module.exports = {
-    token: "mg269E8FiXwz9jHtaYYY0UGVPbgLJ3TBvGQnfkpGgbv7G7aZt7kZ5s4EPrqz_agj",
-    prefix: "?",
+    token: "YOUR_BOT_TOKEN",
+    prefix: "YOUR_BOT_PREFIX",
 };
-  
-// Revolt Template by @Sympact06 // config.js

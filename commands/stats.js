@@ -17,15 +17,18 @@ module.exports = {
       let comHash = require("child_process")
         .execSync("git rev-parse --short HEAD", {cwd: __dirname})
         .toString().trim();
-
+      
       return `${comHash}`;
     }
 
     const embed = new SympactEmbedBuilder()
+      .setTitle("A simple and useful multi-purpose bot for your Revolt server!")
       .setDescription(`Servers: \`${message.client.servers.size}\`
       Users: \`${message.client.users.size}\`
       Uptime: \`${getUptime()}\`
-      Build: \`${getCurrentBuildNumber()}\``);
+      Build: \`${getCurrentBuildNumber()}\`
+      
+      [Dashboard (soon!)](https://app.revolt.chat) | [Support Server](https://rvlt.gg/Fj2RwDNP) | [GitHub](https://github.com/PepeBOTrevolt)`);
     message.reply({ embeds: [embed] });
   },
 };

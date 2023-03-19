@@ -3,6 +3,7 @@
 const { Client } = require("revolt.js");
 const fs = require("fs");
 const { token, prefix } = require("./config.js");
+
 class MyRevoltBot {
   constructor() {
     this.client = new Client();
@@ -93,6 +94,8 @@ class MyRevoltBot {
 const myBot = new MyRevoltBot();
 myBot.login();
 myBot.connectToDash();
+
+// help cmd
 myBot.commands.set("help", {
   name: "help",
   description: "Displays all of the avaliable commands.",

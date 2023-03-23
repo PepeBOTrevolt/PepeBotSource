@@ -10,35 +10,47 @@
     <link rel="shortcut icon" href="<%= myBot.client.user.avatarURL %>" type="image/png">
 </head>
 <body class="bg-gray-900">
-    <!-- navbar -->
-    <%- include("components/nav"); -%>
+    <!-- preloader -->
+    <%- include("components/preloader"); -%>
+    
+    <div class="main hidden">
+        <!-- navbar -->
+        <%- include("components/nav"); -%>
 
-    <!-- main -->
-    <section id="main" class="mt-28">
-        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-            <div class="mr-auto place-self-center lg:col-span-8">
-                <h1 class="max-w-2xl text-2xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-white">
-                    Enter your Revolt User ID
-                </h1>
-                <p class="max-w-2xl font-light text-gray-500 md:text-lg lg:text-xl dark:text-gray-400">
-                    Right click on your profile and click "Copy user ID"
-                </p>
+        <!-- main -->
+        <section id="main" class="mt-28">
+            <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                <div class="mr-auto place-self-center lg:col-span-8">
+                    <h1 class="max-w-2xl text-2xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-white">
+                        Enter your Revolt User ID
+                    </h1>
+                    <p class="max-w-2xl font-light text-gray-500 md:text-lg lg:text-xl dark:text-gray-400">
+                        Right click on your profile and click "Copy user ID"
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 mb-52">
-            <div>
-                <form action="/auth/login" method="post" class="space-y-4">
-                    <label for="revoltUserId" class="sr-only block mb-2 text-sm font-medium text-gray-900 dark:text-white">revoltUserId</label>
-                    <input type="text" id="revoltUserId" name="revoltUserId" placeholder="Revolt User ID" autocomplete="off" required class="block w-full p-4 text-white border-none outline-none bg-gray-800 rounded-lg sm:text-md">
-                    <button type="submit" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800">
-                        Login
-                    </button>
-                </form>
+            <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 mb-52">
+                <div>
+                    <form action="/auth/login" method="post" class="space-y-4">
+                        <label for="revoltUserId" class="sr-only block mb-2 text-sm font-medium text-gray-900 dark:text-white">revoltUserId</label>
+                        <input type="text" id="revoltUserId" name="revoltUserId" placeholder="Revolt User ID" autocomplete="off" required class="block w-full p-4 text-white border-none outline-none bg-gray-800 rounded-lg sm:text-md">
+                        <button type="submit" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800">
+                            Login
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- footer -->
-    <%- include("components/footer"); -%>
+        <!-- footer -->
+        <%- include("components/footer"); -%>
+    </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script>
+    $(window).on("load", function() {
+        $(".spinner").fadeOut();
+        $(".main").fadeIn();
+    });
+</script>
 </html>

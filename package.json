@@ -1,24 +1,11 @@
 {
-  "name": "revolt.js.template",
-  "version": "1.0.0",
-  "description": "Template for revolt.js to make a bot easier",
+  "name": "pepebot",
+  "version": "1.0.2",
+  "description": "A simple and useful multi-purpose bot for your Revolt server!",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sympact06/revolt.js.template.git"
-  },
-  "keywords": [
-    "revolt"
-  ],
-  "author": "Sympact",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sympact06/revolt.js.template/issues"
-  },
-  "homepage": "https://github.com/sympact06/revolt.js.template#readme",
   "dependencies": {
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.3",
@@ -28,6 +15,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "form-data": "^4.0.0",
+    "mongoose": "^7.0.2",
     "node-fetch": "^3.3.1",
     "revolt.js": "^6.0.20"
   },

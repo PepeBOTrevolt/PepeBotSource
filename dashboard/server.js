@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const myBot = require("../index");
 const bodyParser = require("body-parser");
+const config = require("../config");
 
 // set view engine
 app.set("view engine", "ejs");
@@ -40,6 +41,6 @@ app.get("/dashboard/:serverId", async (req, res) => {
 });
 
 // connect
-app.listen(3000, () => {
-    console.info("Dashboard running on http://localhost:3000/")
+app.listen(config.dashboardPort, () => {
+    console.info("Dashboard running on http://localhost:" + config.dashboardPort + "/");
 });

@@ -2,11 +2,13 @@
 
 const { Client } = require("revolt.js");
 const fs = require("fs");
-const { token, prefix } = require("./config.js");
+const { token, prefix, owners } = require("./config.js");
 
 class MyRevoltBot {
   constructor() {
-    this.client = new Client();
+    this.client = new Client({
+      autoReconnect: true
+    });
     this.commands = new Map();
     this.setupListeners();
     this.loadCommands();
@@ -34,12 +36,51 @@ class MyRevoltBot {
       if (
         !message ||
         !message.content ||
-        !message.content.startsWith(prefix) ||
         message.author.bot
-      )
-        return;
+      ) return;
+      if (message.content.startsWith(`<@${this.client.user._id}>`)) {
+          message.reply({
+            content: "",
+            embeds: [{
+              description: `My prefix for ${message.channel.server.name} is \`${prefix}\``
+            }]
+          }
+        );
+      }
       const args = message.content.slice(prefix.length).trim().split(/ +/);
       const commandName = args.shift().toLowerCase();
+
+      // eval command (bot owner only)
+      if (commandName == "eval") {
+        if (!owners.includes(message.author._id)) return message.reply("invalid permissions!");
+
+        try {
+          const evaled = eval(args.join(" "));
+          message.reply(`\`\`\`js\n${evaled}\n\`\`\``);
+        } catch (err) {
+          message.reply(`\`\`\`xl\n${err}\n\`\`\``);
+        }
+      }
+
+      // server list command (bot owner only)
+      if (commandName == "sl") {
+        if (!owners.includes(message.author._id)) return message.reply("invalid permissions!");
+
+        let serverArray = [];
+        this.client.servers.forEach(server => {
+          serverArray.push(server.name);
+        });
+        
+        const s = serverArray.map(e => e).join("\n")
+        message.channel.sendMessage({
+          content: "",
+          embeds: [{
+            title: `${this.client.user.username} server list`,
+            description: `${s}`
+          }]
+        })
+      }
+      
       const command = this.commands.get(commandName);
       if (!command) return;
       command.execute(message, args);
@@ -50,13 +91,21 @@ class MyRevoltBot {
 
   // load commands
   loadCommands() {
-    const commandFiles = fs
-      .readdirSync("./commands")
-      .filter((file) => file.endsWith(".js"));
-    for (const file of commandFiles) {
-      const command = require(`./commands/${file}`);
-      this.commands.set(command.name, command);
-    }
+    fs.readdirSync("./commands", { withFileTypes: true })
+      .forEach((dirs) => {
+        if (dirs.isFile()) return;
+
+        const commandFiles = fs
+          .readdirSync(`./commands/${dirs.name}/`)
+          .filter((file) => file.endsWith(".js"));
+      
+        for (const file of commandFiles) {
+          const command = require(`./commands/${dirs.name}/${file}`);
+          this.commands.set(command.name, command);
+          console.info(`Loaded ${command.name}`);
+        }
+      }
+    );
   }
 
   // login

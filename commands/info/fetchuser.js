@@ -2,11 +2,14 @@ const SympactEmbedBuilder = require("../../lib/embedBuilder");
 const { prefix } = require("../../config");
 
 module.exports = {
-  name: "whois",
-  description: "Gets info about a user.",
-  usage: `${prefix}whois <@user>`,
+  name: "fetchuser",
+  description: "Gets info about a user from their user id.",
+  usage: `${prefix}fetchuser <USER_ID>`,
   async execute(message, args) {
-    const user = message.mentions[0] || message.author;
+    const userId = args[0];
+    if (!userId) return message.reply("userId required!");
+
+    const user = message.client.users.get(userId);
 
     let User = 0;
     let Developer = 1;
@@ -20,13 +23,7 @@ module.exports = {
     let EarlyAdopter = 256;
     let badges = user.badges;
     let embedBadge = "";
-
-    if ((badges & User) == User) {
-      embedBadge += "No badges";
-    } else {
-      embedBadge += "";
-    }
-
+    
     if ((badges & Developer) == Developer) {
       embedBadge += "Developer, ";
     } else {
@@ -86,7 +83,7 @@ module.exports = {
       .setIcon(`${user.avatarURL}`)
       .setDescription(`ID: \`${user._id}\`
       Joined Revolt: \`${new Date(user.createdAt).toLocaleString()}\`
-      Badges:\`${embedBadge}\`
+      Badges: \`${embedBadge}\`
       
       [[Avatar URL]](${user.avatarURL})`);
     message.reply({ embeds: [embed] });

@@ -25,8 +25,12 @@ class MyRevoltBot {
           text: `${prefix}help | ${this.client.servers.size} servers`,
           presence: "Online"
         },
-      })
+      }),
     );
+    this.client.once("ready", () => {
+      this.fetchUsers();
+      setInterval(() => this.fetchUsers, 60 * 1000 * 30);
+    });
     this.client.on("message", this.handleMessage.bind(this));
   }
 
@@ -36,17 +40,9 @@ class MyRevoltBot {
       if (
         !message ||
         !message.content ||
+        !message.content.startsWith(prefix) ||
         message.author.bot
       ) return;
-      if (message.content.startsWith(`<@${this.client.user._id}>`)) {
-          message.reply({
-            content: "",
-            embeds: [{
-              description: `My prefix for ${message.channel.server.name} is \`${prefix}\``
-            }]
-          }
-        );
-      }
       const args = message.content.slice(prefix.length).trim().split(/ +/);
       const commandName = args.shift().toLowerCase();
 
@@ -106,6 +102,15 @@ class MyRevoltBot {
         }
       }
     );
+  }
+
+  // fetch all users
+  async fetchUsers() {
+    const promises = [];
+    for (const server of this.client.servers) {
+      promises.push(server[1].fetchMembers());
+      console.log(this.client.servers.size);
+    }
   }
 
   // login

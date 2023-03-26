@@ -14,19 +14,11 @@ module.exports = {
       return `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
     }
 
-    async function fetchUsers() {
-      const promises = [];
-      for (const server of message.client.servers) {
-        promises.push(server[1].fetchMembers());
-      }
-    }
-    fetchUsers();
-    setInterval(() => fetchUsers, 60 * 1000 * 30);
-
     const embed = new SympactEmbedBuilder()
       .setTitle("A simple and useful multi-purpose bot for your Revolt server!")
       .setDescription(`Servers: \`${message.client.servers.size}\`
       Users: \`${message.client.users.size}\`
+      Heartbeat: \`${message.client.websocket.heartbeat}\`
       Uptime: \`${getUptime()}\`
       Version: \`${require("../../package.json").version}\`
       Build: \`${require("child_process").execSync("git rev-parse --short HEAD", {cwd: __dirname}).toString().trim()}\`
